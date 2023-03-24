@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+	<title>House Price Prediction</title>
+	<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+	<style>
+		body {
+			background-color: #221f1f;
+			color: #fff;
+		}
+
+		.container {
+            
+			margin-top: 50px;
+			max-width: 500px;
+			background-color: #141414;
+			border-radius: 10px;
+			padding: 30px;
+			box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.3);
+		}
+
+		h1 {
+            font-family: BreezeSans;
+			font-size: 3rem;
+			margin-bottom: 30px;
+		}
+
+		label {
+			font-size: 1.2rem;
+			margin-bottom: 10px;
+			display: block;
+		}
+
+		input[type="text"],
+		input[type="number"] ,select{
+			width: 100%;
+			height: 50px;
+			padding: 10px;
+			font-size: 1.2rem;
+			border-radius: 5px;
+			border: none;
+			margin-bottom: 20px;
+			background-color: #333;
+			color: #fff;
+		}
+
+		input[type="submit"] {
+			background-color: #e50914;
+			color: #fff;
+			border: none;
+			padding: 10px;
+			cursor: pointer;
+			font-size: 1.2rem;
+			margin-top: 20px;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+			width: 100%;
+			height: 50px;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #3313d2;
+		}
+
+		.output {
+			margin-top: 30px;
+			background-color: #333;
+			padding: 20px;
+			border-radius: 5px;
+		}
+
+		.output h2 {
+			margin-bottom: 20px;
+			font-size: 1.5rem;
+		}
+
+		.output p {
+			font-size: 1.2rem;
+			margin-bottom: 10px;
+		}
+        
+        body{
+    background-image: url('back1.gif');
+    background-size: cover;
+    
+    
+    
+    height: 100vh;
+    padding:0;
+    margin:0;
+}
+	</style>
+</head>
+<body>
+    <marquee behavior="alternate"><h1>SAMSUNG INNOVATION CAMPUS</h1></marquee>
+    <center>
+	<div class="container" align="left">
+		<h1>House Price Prediction</h1>
+		<form method="post" action="predict">
+			<label for="location">Location:</label>
+			<select type="text" placeholder="--Please enter location--"id="location" name="location" required>
+                <option value="--Please enter location--">--Please enter location--</option>
+            <script id="location" placeholder="--Please enter location--">
+                // Read the CSV file
+                fetch('BHP.csv')
+                  .then(response => response.text())
+                  .then(text => {
+                    // Split the text into lines and parse each line as a CSV row
+                    const rows = text.trim().split('\n').map(row => row.split(','));
+              
+                    // Populate the dropdown with options
+                    const dropdown = document.getElementById('location');
+                    rows.forEach(row => {
+                      const option = document.createElement('option');
+                      option.value = row[3];
+                      option.text = row[2];
+                      dropdown.appendChild(option);
+                    });
+                  });
+              </script>
+              </select>
+            
+
+			<label for="area">Area (sq. ft.):</label>
+			<select type="number" placeholder="--Please enter area--"id="area" name="area" required>
+                <script id="location" placeholder="--Please enter location--">
+                    // Read the CSV file
+                    fetch('BHP.csv')
+                      .then(response => response.text())
+                      .then(text => {
+                        // Split the text into lines and parse each line as a CSV row
+                        const rows = text.trim().split('\n').map(row => row.split(','));
+                  
+                        // Populate the dropdown with options
+                        const dropdown = document.getElementById('total_sqft.csv');
+                        rows.forEach(row => {
+                          const option = document.createElement('option');
+                          option.value = row[3];
+                          option.text = row[2];
+                          dropdown.appendChild(option);
+                        });
+                      });
+                  </script>
+            </select>
+                
+
+			<label for="bathrooms">Number of Bathrooms:</label>
+			<select type="number" placeholder="--Please enter bathrooms--" id="bathrooms" name="bathrooms" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>    
+                <option value="4">4</option>    
+                <option value="5">5</option>    
+                <option value="6">6</option>    
+                <option value="7">7</option>    
+                <option value="8">8</option>    
+                <option value="9">9</option>    
+            </select>
+
+			<label for="bhk">Number of BHK:</label>
+			<select type="number" placeholder="--Please enter bhk--" id="bhk" name="bhk" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>    
+                <option value="4">4</option>    
+                <option value="5">5</option>    
+                <option value="6">6</option>    
+                <option value="7">7</option>    
+                <option value="8">8</option>    
+                <option value="9">9</option>   
+            </select>
+			<input type="submit" value="Predict Price">
+		</form>
+
+		<div class="output">
+			<h2>Predicted Price: 23</h2>
+		</div>
+        
+          
+	</div>
+</center>
+	<script>
+		// Replace this with your backend API endpoint for house price prediction
+		const PREDICT_PRICE_ENDPOINT = '

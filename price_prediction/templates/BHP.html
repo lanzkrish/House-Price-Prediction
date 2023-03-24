@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+    
+<head>
+	<title>House Price Prediction</title>
+	<link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/v4-dev/dist/css/bootstrap.css">
+	<style>
+		body {
+			background-color: #221f1f;
+			color: #fff;
+		}
+
+		.container {
+            
+			margin-top: 50px;
+			max-width: 500px;
+			background-color: #141414;
+			border-radius: 10px;
+			padding: 30px;
+			box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.3);
+		}
+
+		h1 {
+            font-family: BreezeSans;
+			font-size: 3rem;
+			margin-bottom: 30px;
+		}
+
+		label {
+			font-family: 'BreezeSans';
+			font-weight: bolder;
+			font-size: 1.2rem;
+			margin-bottom: 10px;
+			display: block;
+		}
+
+		input[type="text"],
+		input[type="number"] ,select{
+			font-family: 'BreezeSans';
+			font-weight: lighter;
+			width: 100%;
+			height: 50px;
+			padding: 10px;
+			font-size: 1.2rem;
+			border-radius: 5px;
+			border: none;
+			margin-bottom: 20px;
+			background-color: #333;
+			color: #fff;
+		}
+
+		input[type="submit"] {
+			background-color: #e50914;
+			color: #fff;
+			border: none;
+			padding: 10px;
+			cursor: pointer;
+			font-size: 1.2rem;
+			margin-top: 20px;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+			width: 100%;
+			height: 50px;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #3313d2;
+		}
+
+		.output {
+			margin-top: 30px;
+			background-color: #333;
+			padding: 20px;
+			border-radius: 5px;
+		}
+
+		.output h2 {
+			font-family: 'BreezeSans';
+			font-weight: bolder;
+			margin-bottom: 20px;
+			font-size: 1.5rem;
+		}
+
+		.output p {
+			font-size: 1.2rem;
+			margin-bottom: 10px;
+		}
+        
+        body{
+   			background-image: url('{%static 'gif/back1.gif'%}');
+			background-size: cover;
+    		height: 70vh;
+   		 	padding:0;
+    		margin:0;
+		}
+	</style>
+</head>
+<body >
+    <center>
+		<h1>SAMSUNG INNOVATION CAMPUS</h1>
+	<div class="container" align="left">
+		<h1>House Price Prediction</h1>
+		<form method="post" action="{% url 'PredictPrice' %}">
+			{% csrf_token %}
+			<label for="location">Location:</label>
+			<select type="text" placeholder="--Please enter location--"id="location" name="location" required>
+					<option value="">Select a location</option>
+					<option value="7th Phase JP Nagar">7th Phase JP Nagar</option>
+					<option value="Banashankari">Banashankari</option>
+					<option value="Bannerghatta Road">Bannerghatta Road</option>
+					<option value="Begur Road">Begur Road</option>
+					<option value="Bellandur">Bellandur</option>
+					<option value="Chandapura">Chandapura</option>
+					<option value="Electronic City">Electronic City</option>
+					<option value="Electronic City Phase II">Electronic City Phase II</option>
+					<option value="Electronics City Phase 1">Electronics City Phase 1</option>
+					<option value="Haralur Road">Haralur Road</option>
+					<option value="Harlur">Harlur</option>
+					<option value="Hebbal">Hebbal</option>
+					<option value="Hennur Road">Hennur Road</option>
+					<option value="Hoodi">Hoodi</option>
+					<option value="Hormavu">Hormavu</option>
+					<option value="KR Puram">KR Puram</option>
+					<option value="Kanakpura Road">Kanakpura Road</option>
+					<option value="Kasavanhalli">Kasavanhalli</option>
+					<option value="Kengeri">Kengeri</option>
+					<option value="Marathahalli">Marathahalli</option>
+					<option value="Raja Rajeshwari Nagar">Raja Rajeshwari Nagar</option>
+					<option value="Rajaji Nagar">Rajaji Nagar</option>
+					<option value="Ramamurthy Nagar">Ramamurthy Nagar</option>
+					<option value="Sarjapur">Sarjapur</option>
+					<option value="Sarjapur Road">Sarjapur Road</option>
+					<option value="Thanisandra">Thanisandra</option>
+					<option value="Uttarahalli">Uttarahalli</option>
+					<option value="Whitefield">Whitefield</option>
+					<option value="Yelahanka">Yelahanka</option>
+					<option value="Yeshwanthpur">Yeshwanthpur</option>
+				  </select>
+				  
+
+			  <label for="area_type">Area Type:</label>
+			  <select type="text" placeholder="--Please enter area_type--"id="area_type" name="area_type" required>
+				<option value="">Select an area type</option>
+				<option value="Built-up  Area">Built-up Area</option>
+				<option value="Carpet  Area">Carpet Area</option>
+				<option value="Plot  Area">Plot Area</option>
+				<option value="Super built-up  Area">Super built-up Area</option>
+				</select>
+
+			<label for="total_sqft">Area Size (sq. ft.):</label>
+			<input type="number" placeholder="--Please enter sq ft--"id="total_sqft" name="total_sqft" required>
+                
+                
+			<label for="size">Number of BHK:</label>
+			<select type="number" placeholder="--Please enter bhk--" id="size" name="size" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>    
+                <option value="4">4</option>    
+                <option value="5">5</option>    
+                <option value="6">6</option>    
+                <option value="7">7</option>    
+                <option value="8">8</option>    
+                <option value="9">9</option>   
+            </select>
+
+
+			<label for="bathrooms">Number of Bathrooms:</label>
+			<select type="number" placeholder="--Please enter bathrooms--" id="bathrooms" name="bathrooms" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>    
+                <option value="4">4</option>    
+                <option value="5">5</option>    
+                <option value="6">6</option>    
+                <option value="7">7</option>    
+                <option value="8">8</option>    
+                <option value="9">9</option>    
+            </select>
+
+
+			<label for="balcony">Number of Balcony:</label>
+			<select type="number" placeholder="--Please enter balcony--" id="balcony" name="balcony" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>    
+                <option value="4">4</option>    
+                <option value="5">5</option>    
+                <option value="6">6</option>    
+                <option value="7">7</option>    
+                <option value="8">8</option>    
+                <option value="9">9</option>   
+            </select>
+
+
+
+			<input type="submit" value="PredictPrice">
+			
+		</form>
+		<div class="output">
+			<h2>Predicted Price: {{price}}</h2>
+
+		</div>
+        
+
+
+<script>
+  const firstSelection = document.querySelector('#size');
+  const secondSelection = document.querySelector('#bathrooms');
+  const thirdSelection = document.querySelector('#balcony')
+
+  firstSelection.addEventListener('change', (event) => {
+    // Enable the second selection
+    secondSelection.disabled = false;
+	thirdSelection.disabled = false
+
+    // Remove all options from the second selection
+    secondSelection.innerHTML = '';
+    thirdSelection.innerHTML = '';
+
+    // Create options for the second selection up to the selected number in the first selection
+    for (let i = 1; i <= Number(event.target.value)+1; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.text = i;
+      secondSelection.appendChild(option);
+
+	}
+	for (let i = 1; i <= Number(event.target.value)+1; i++) {
+		const option = document.createElement('option');
+     	 option.value = i;
+     	 option.text = i;
+		thirdSelection.appendChild(option);
+    }
+  });
+</script>
+
+          
+	</div>
+</center>
+
